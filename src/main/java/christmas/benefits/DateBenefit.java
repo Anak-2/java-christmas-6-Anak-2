@@ -2,6 +2,7 @@ package christmas.benefits;
 
 import christmas.eventdate.EventDateUtils;
 import static christmas.eventdate.EventDateConstant.*;
+import static christmas.benefits.BenefitConstant.*;
 
 public class DateBenefit {
 
@@ -12,7 +13,7 @@ public class DateBenefit {
     }
 
     public int calculateBenefitByDate(int currentDate){
-        int diffDays = eventDateUtils.calculateDateDiff(currentDate, EVENT_LAST_DATE.getDay());
-        return 0;
+        int diffDays = eventDateUtils.calculateDateDiff(EVENT_START_DATE.getDay(), currentDate);
+        return INIT_DATE_BENEFIT.getBenefitAmount() + (diffDays * INCREASE_BENEFIT_BY_DATE.getBenefitAmount());
     }
 }
