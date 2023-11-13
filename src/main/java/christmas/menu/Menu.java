@@ -39,10 +39,10 @@ public enum Menu {
         return price;
     }
 
-    public static boolean isMenuExist(String menuName) {
+    public static Menu findMenu(String menuName) {
         for (Menu menu : Menu.values()) {
             if (menu.getMenu().equals(menuName)) {
-                return true;
+                return menu;
             }
         }
         throw new IllegalArgumentException(NO_EXIST_MENU.getMessage());
