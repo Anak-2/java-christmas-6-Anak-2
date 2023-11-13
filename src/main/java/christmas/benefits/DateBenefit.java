@@ -6,7 +6,7 @@ import christmas.menu.Order;
 import java.util.List;
 
 import static christmas.eventdate.EventDateConstant.*;
-import static christmas.benefits.BenefitConstant.*;
+import static christmas.benefits.constant.BenefitConstant.*;
 
 public class DateBenefit {
 
@@ -25,11 +25,12 @@ public class DateBenefit {
         return INIT_DATE_BENEFIT.getBenefit() + (diffDays * INCREASE_BENEFIT_BY_DATE.getBenefit());
     }
 
-    public int calculateBenefitByWeekend(List<Order> orders, int currentDate){
-        if(eventDateUtils.isWeekend(currentDate)){
-            List<Order> mainMenus = Order.findMainMenus(orders);
-            return Math.multiplyExact(mainMenus.size(), WEEKEND_DISCOUNT.getBenefit());
-        }
+    public int calculateBenefitByWeekend(List<Order> orders){
+        List<Order> mainMenus = Order.findMainMenus(orders);
+        return Math.multiplyExact(mainMenus.size(), WEEKEND_DISCOUNT.getBenefit());
+    }
+
+    public int calculateBenefitByWeekday(List<Order> orders){
         List<Order> desserts = Order.findDesserts(orders);
         return Math.multiplyExact(desserts.size(), WEEKEND_DISCOUNT.getBenefit());
     }

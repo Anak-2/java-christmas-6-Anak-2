@@ -1,8 +1,14 @@
 package christmas.benefits;
 
+import christmas.benefits.constant.BenefitConstant;
+import christmas.benefits.constant.BenefitName;
+import christmas.eventdate.EventDateUtils;
 import christmas.menu.Order;
 
 import java.util.List;
+
+import static christmas.benefits.constant.BenefitConstant.CHAMPAGNE;
+import static christmas.benefits.constant.BenefitName.*;
 
 public class BenefitUtils {
 
@@ -12,34 +18,52 @@ public class BenefitUtils {
     private final SpecialBenefit specialBenefit;
     private final MerchandiseBenefit merchandiseBenefit;
 
+    private AccumulateDiscount accumulateDiscount;
+
     public BenefitUtils(DateBenefit dateBenefit, SpecialBenefit specialBenefit,
                         MerchandiseBenefit merchandiseBenefit) {
         this.dateBenefit = dateBenefit;
         this.specialBenefit = specialBenefit;
         this.merchandiseBenefit = merchandiseBenefit;
+        this.accumulateDiscount = new AccumulateDiscount();
     }
 
-    public boolean isEventTarget(int totalOrder){
+    public AccumulateDiscount calculateBenefit(List<Order> orders, int day){
+        int totalPrice = Order.totalPrice(orders);
+        if(!isEventTarget(totalPrice)){
+            return accumulateDiscount;
+        }
+        calculateDateBenefit(orders, day);
+        calculateMerchandiseBenefit(totalPrice);
+        calculateSpecialBenefit(day);
+        return accumulateDiscount;
+    }
+
+    private boolean isEventTarget(int totalOrder){
         return (totalOrder >= EVENT_TARGET_CONDITION);
     }
 
-    public int calculateBenefit(List<Order> orders, int day){
-        int totalPrice = Order.totalPrice(orders);
-        // 혜택 대상인지 확인
-        if(!isEventTarget(totalPrice)){
-            return 0;
+    private int calculateDateBenefit(List<Order> orders, int day){
+        int ddayBenefit = dateBenefit.calculateBenefitByDDay(day);
+        accumulateDiscount.accumulate(CHRISTMAS_DDAY, ddayBenefit);
+        if(EventDateUtils.isWeekend(day)){
+            int weekendBenefit = dateBenefit.calculateBenefitByWeekend(orders);
+            accumulateDiscount.accumulate(WEEKEND_DISCOUNT, weekendBenefit);
+            return Math.addExact(ddayBenefit, weekendBenefit);
         }
-        // 날짜 관련 혜택 확인
-        int dateBenefit = calculateDateBenefit(orders, day);
-        // 증정 혜택 관련 확인
-        // 특별 혜택 관련 확인
-        // 샴페인 대상인지 확인
-        return 0;
+        int weekdayBenefit = dateBenefit.calculateBenefitByWeekday(orders);
+        return Math.addExact(ddayBenefit, weekdayBenefit);
     }
 
-    public int calculateDateBenefit(List<Order> orders, int day){
-        int dDayBenefit = dateBenefit.calculateBenefitByDDay(day);
-        int weekBenefit = dateBenefit.calculateBenefitByWeekend(orders, day);
-        return Math.addExact(dDayBenefit, weekBenefit);
+    private void calculateMerchandiseBenefit(int totalPrice){
+        if(merchandiseBenefit.champagneDeserved(totalPrice)){
+            accumulateDiscount.accumulate(MERCHANDISE_EVENT, CHAMPAGNE.getBenefit());
+        }
+    }
+
+    private int calculateSpecialBenefit(int day){
+        int specialDiscount = specialBenefit.starMarkedBenefit(day);
+        accumulateDiscount.accumulate(SPECIAL_DISCOUNT, specialDiscount);
+        return specialDiscount;
     }
 }

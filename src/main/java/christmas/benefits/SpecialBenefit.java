@@ -2,7 +2,7 @@ package christmas.benefits;
 
 import christmas.eventdate.EventDateUtils;
 
-import static christmas.benefits.BenefitConstant.STAR_MARKED_DISCOUNT;
+import static christmas.benefits.constant.BenefitConstant.STAR_MARKED_DISCOUNT;
 
 public class SpecialBenefit {
 

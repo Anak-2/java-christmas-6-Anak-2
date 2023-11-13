@@ -19,7 +19,7 @@ public class EventDateUtils {
         return (day > EventDateConstant.CHRISTMAS_DATE.getDay());
     }
 
-    public boolean isWeekend(int day){
+    public static boolean isWeekend(int day){
         List<Integer> weekends = Arrays.asList(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
         return weekends.contains(day);
     }
