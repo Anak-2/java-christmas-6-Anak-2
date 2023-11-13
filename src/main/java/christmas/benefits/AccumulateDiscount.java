@@ -16,10 +16,23 @@ public class AccumulateDiscount {
         }
     }
 
+    public int calculateTotalBenefit(){
+        int totalBenefit = 0;
+        for (int discount : benefitDiscount.values()) {
+            totalBenefit += discount;
+        }
+        return totalBenefit;
+    }
+
     public int calculateTotalDiscount(){
         int totalDiscount = 0;
-        for (int discount : benefitDiscount.values()) {
-            totalDiscount += discount;
+        for (Map.Entry<BenefitName, Integer> entry : benefitDiscount.entrySet()) {
+            BenefitName benefitName = entry.getKey();
+            int discount = entry.getValue();
+
+            if (benefitName != BenefitName.MERCHANDISE_EVENT) {
+                totalDiscount += discount;
+            }
         }
         return totalDiscount;
     }
