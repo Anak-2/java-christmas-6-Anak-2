@@ -1,5 +1,8 @@
 package christmas.eventdate;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static christmas.global.error.NumberErrorMessage.*;
 
 public class EventDateUtils {
@@ -14,5 +17,10 @@ public class EventDateUtils {
 
     public boolean isChristmasAfter(int day){
         return (day > 25);
+    }
+
+    public boolean isWeekend(int day){
+        List<Integer> weekends = Arrays.asList(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
+        return weekends.contains(day);
     }
 }
