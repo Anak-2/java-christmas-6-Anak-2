@@ -1,6 +1,10 @@
 package christmas.benefits;
 
 import christmas.eventdate.EventDateUtils;
+import christmas.menu.Order;
+
+import java.util.List;
+
 import static christmas.eventdate.EventDateConstant.*;
 import static christmas.benefits.BenefitConstant.*;
 
@@ -21,4 +25,10 @@ public class DateBenefit {
         return INIT_DATE_BENEFIT.getBenefitAmount() + (diffDays * INCREASE_BENEFIT_BY_DATE.getBenefitAmount());
     }
 
+    public int calculateBenefitByWeekend(List<Order> orders, int currentDate){
+        if(eventDateUtils.isWeekend(currentDate)){
+
+        }
+        return 0;
+    }
 }
