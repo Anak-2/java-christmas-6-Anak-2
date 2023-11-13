@@ -22,17 +22,15 @@ public class DateBenefit {
             return benefit;
         }
         int diffDays = eventDateUtils.calculateDateDiff(CHRISTMAS_DATE.getDay(), currentDate);
-        return INIT_DATE_BENEFIT.getBenefitAmount() + (diffDays * INCREASE_BENEFIT_BY_DATE.getBenefitAmount());
+        return INIT_DATE_BENEFIT.getBenefit() + (diffDays * INCREASE_BENEFIT_BY_DATE.getBenefit());
     }
 
     public int calculateBenefitByWeekend(List<Order> orders, int currentDate){
-        final int DISCOUNT = 2023;
-
         if(eventDateUtils.isWeekend(currentDate)){
             List<Order> mainMenus = Order.findMainMenus(orders);
-            return Math.multiplyExact(mainMenus.size(),DISCOUNT);
+            return Math.multiplyExact(mainMenus.size(), WEEKEND_DISCOUNT.getBenefit());
         }
         List<Order> desserts = Order.findDesserts(orders);
-        return Math.multiplyExact(desserts.size(), DISCOUNT);
+        return Math.multiplyExact(desserts.size(), WEEKEND_DISCOUNT.getBenefit());
     }
 }

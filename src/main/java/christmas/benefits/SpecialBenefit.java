@@ -2,6 +2,8 @@ package christmas.benefits;
 
 import christmas.eventdate.EventDateUtils;
 
+import static christmas.benefits.BenefitConstant.STAR_MARKED_DISCOUNT;
+
 public class SpecialBenefit {
 
     private EventDateUtils eventDateUtils;
@@ -11,9 +13,7 @@ public class SpecialBenefit {
     }
 
     public int starMarkedBenefit(int day){
-        final int STAR_MARKED_DISCOUNT = 1000;
-
         if(eventDateUtils.isStarMarked(day));
-        return STAR_MARKED_DISCOUNT;
+        return STAR_MARKED_DISCOUNT.getBenefit();
     }
 }
