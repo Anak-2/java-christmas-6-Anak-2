@@ -16,7 +16,7 @@ public class EventDateUtils {
     }
 
     public boolean isChristmasAfter(int day){
-        return (day > 25);
+        return (day > EventDateConstant.CHRISTMAS_DATE.getDay());
     }
 
     public boolean isWeekend(int day){
