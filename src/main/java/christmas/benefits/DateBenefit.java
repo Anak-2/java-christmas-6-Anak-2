@@ -26,9 +26,13 @@ public class DateBenefit {
     }
 
     public int calculateBenefitByWeekend(List<Order> orders, int currentDate){
-        if(eventDateUtils.isWeekend(currentDate)){
+        final int DISCOUNT = 2023;
 
+        if(eventDateUtils.isWeekend(currentDate)){
+            List<Order> mainMenus = Order.findMainMenus(orders);
+            return Math.multiplyExact(mainMenus.size(),DISCOUNT);
         }
-        return 0;
+        List<Order> desserts = Order.findDesserts(orders);
+        return Math.multiplyExact(desserts.size(), DISCOUNT);
     }
 }

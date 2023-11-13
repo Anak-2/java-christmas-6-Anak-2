@@ -23,7 +23,7 @@ public class Order {
         this.count = count;
     }
 
-    public List<Order> findDesserts(List<Order> orders){
+    public static List<Order> findDesserts(List<Order> orders){
         List<Order> desserts = new ArrayList<>();
         for(Order order : orders){
             if(order.getMenu().getCategory() == DESSERT){
@@ -33,7 +33,7 @@ public class Order {
         return desserts;
     }
 
-    public List<Order> findMainMenus(List<Order> orders){
+    public static List<Order> findMainMenus(List<Order> orders){
         List<Order> mainMenus = new ArrayList<>();
         for(Order order : orders){
             if(order.getMenu().getCategory() == MAIN_MENU){
