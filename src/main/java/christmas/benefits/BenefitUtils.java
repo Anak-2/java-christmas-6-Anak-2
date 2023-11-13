@@ -1,5 +1,6 @@
 package christmas.benefits;
 
+import christmas.benefits.constant.Badge;
 import christmas.benefits.constant.BenefitConstant;
 import christmas.benefits.constant.BenefitName;
 import christmas.eventdate.EventDateUtils;
@@ -65,5 +66,18 @@ public class BenefitUtils {
         int specialDiscount = specialBenefit.starMarkedBenefit(day);
         accumulateDiscount.accumulate(SPECIAL_DISCOUNT, specialDiscount);
         return specialDiscount;
+    }
+
+    public Badge calculateBadge(int totalBenefit){
+        if(totalBenefit >= Badge.SANTA.getRequiredPrice()){
+            return Badge.SANTA;
+        }
+        if(totalBenefit >= Badge.TREE.getRequiredPrice()){
+            return Badge.TREE;
+        }
+        if(totalBenefit >= Badge.STAR.getRequiredPrice()){
+            return Badge.STAR;
+        }
+        return Badge.NOTHING;
     }
 }
