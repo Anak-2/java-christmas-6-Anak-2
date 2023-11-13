@@ -1,5 +1,6 @@
 package christmas.menu;
 
+import static christmas.global.error.InputErrorMessage.NO_EXIST_MENU;
 import static christmas.menu.Category.*;
 
 public enum Menu {
@@ -36,5 +37,14 @@ public enum Menu {
 
     public int getPrice() {
         return price;
+    }
+
+    public static boolean isMenuExist(String menuName) {
+        for (Menu menu : Menu.values()) {
+            if (menu.getMenu().equals(menuName)) {
+                return true;
+            }
+        }
+        throw new IllegalArgumentException(NO_EXIST_MENU.getMessage());
     }
 }

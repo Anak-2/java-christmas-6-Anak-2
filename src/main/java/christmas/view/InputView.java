@@ -3,6 +3,8 @@ package christmas.view;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.menu.Menu;
 
+import java.util.List;
+
 public class InputView {
 
     private final String ASK_VISIT_DATE = "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)";
@@ -34,4 +36,10 @@ public class InputView {
         InputValidator.validDate(inputDate);
         return Integer.parseInt(inputDate);
     }
+
+//    public List<Menu> parseMenu(String inputMenu){
+//
+//    }
+
+
 }

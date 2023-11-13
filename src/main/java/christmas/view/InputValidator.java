@@ -2,6 +2,7 @@ package christmas.view;
 
 import christmas.eventdate.EventDateUtils;
 import christmas.manager.ChristmasEventManager;
+import christmas.menu.Menu;
 
 public class InputValidator {
 
@@ -15,6 +16,6 @@ public class InputValidator {
 
     // 메뉴 오류
     public static void validMenu(String inputMenu){
-
+        Menu.isMenuExist(inputMenu);
     }
 }
