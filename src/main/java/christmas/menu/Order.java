@@ -43,4 +43,11 @@ public class Order {
         return mainMenus;
     }
 
+    public static int totalPrice(List<Order> orders) {
+        int totalPrice = 0;
+        for(Order order : orders){
+            totalPrice += Math.multiplyExact(order.getMenu().getPrice(), order.getCount());
+        }
+        return totalPrice;
+    }
 }
