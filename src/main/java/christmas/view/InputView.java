@@ -2,8 +2,10 @@ package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.menu.Menu;
+import christmas.menu.Order;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -25,11 +27,10 @@ public class InputView {
         return date;
     }
 
-    public String askMenuAndCount(){
+    public List<Order> askMenuAndCount(){
         System.out.println(ASK_MENU_AND_COUNT);
         String menuAndCount = Console.readLine();
-        System.out.println(menuAndCount);
-        return menuAndCount;
+        return parseOrder(menuAndCount);
     }
 
     public int parseDate(String inputDate){
@@ -37,9 +38,32 @@ public class InputView {
         return Integer.parseInt(inputDate);
     }
 
-//    public List<Menu> parseMenu(String inputMenu){
-//
-//    }
+    public List<Order> parseOrder(String inputMenu){
+        List<String> menus = parseComma(inputMenu);
+        List<Order> orders = parseMenuAndCount(menus);
+        InputValidator.isAllBeverage(orders);
+        return orders;
+    }
 
+    public List<String> parseComma(String inputMenus){
+        return Arrays.stream(inputMenus.split(",")).toList();
+    }
 
+    public List<Order> parseMenuAndCount(List<String> inputMenus){
+        final int MENU = 0;
+        final int COUNT = 1;
+        List<Order> orders = new ArrayList<>();
+
+        for(String menuAndCount : inputMenus){
+            List<String> order = Arrays.stream(menuAndCount.split("-")).toList();
+            orders.add(new Order(Menu.findMenu(order.get(MENU)), parseMenuCount(order.get(COUNT))));
+        }
+        return orders;
+    }
+
+    public int parseMenuCount(String inputMenuCount){
+        int menuCount = Integer.parseInt(inputMenuCount);
+        InputValidator.validMenuCount(menuCount);
+        return menuCount;
+    }
 }
