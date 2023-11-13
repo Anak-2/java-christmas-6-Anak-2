@@ -2,6 +2,7 @@ package christmas.manager;
 
 import christmas.benefits.DateBenefit;
 import christmas.eventdate.EventDateUtils;
+import christmas.view.InputValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -20,7 +21,7 @@ public class ChristmasEventManager {
     }
 
     public void startChristmasEvent(){
-        String userInputDate = inputView.askVisitDate();
+        int userInputDate = inputView.askVisitDate();
         String userInputMenu = inputView.askMenuAndCount();
     }
 
@@ -39,4 +40,6 @@ public class ChristmasEventManager {
     public DateBenefit getDateBenefit() {
         return dateBenefit;
     }
+
+
 }

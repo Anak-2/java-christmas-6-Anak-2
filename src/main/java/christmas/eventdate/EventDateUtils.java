@@ -28,4 +28,10 @@ public class EventDateUtils {
         List<Integer> starMarkedDays = Arrays.asList(3,10,17,24,25,31);
         return starMarkedDays.contains(day);
     }
+
+    public void isValidDay(int day){
+        if(day > 31 || day < 1){
+            throw new IllegalArgumentException(OUT_OF_DECEMBER.getMessage());
+        }
+    }
 }
