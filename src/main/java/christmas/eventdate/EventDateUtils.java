@@ -23,4 +23,9 @@ public class EventDateUtils {
         List<Integer> weekends = Arrays.asList(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
         return weekends.contains(day);
     }
+
+    public boolean isStarMarked(int day){
+        List<Integer> starMarkedDays = Arrays.asList(3,10,17,24,25,31);
+        return starMarkedDays.contains(day);
+    }
 }
