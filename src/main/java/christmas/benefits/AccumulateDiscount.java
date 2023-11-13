@@ -1,6 +1,8 @@
 package christmas.benefits;
 
+import christmas.benefits.constant.BenefitConstant;
 import christmas.benefits.constant.BenefitName;
+import christmas.benefits.constant.Merchandise;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,5 +41,10 @@ public class AccumulateDiscount {
 
     public void accumulate(BenefitName name, int discount){
         benefitDiscount.put(name, discount);
+    }
+
+    public boolean checkMerchandiseEvent(){
+        int price = benefitDiscount.get(BenefitName.MERCHANDISE_EVENT);
+        return (price > BenefitConstant.NOTHING.getBenefit());
     }
 }

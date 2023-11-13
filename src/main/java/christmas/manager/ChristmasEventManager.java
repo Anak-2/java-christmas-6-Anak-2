@@ -1,32 +1,44 @@
 package christmas.manager;
 
+import christmas.benefits.BenefitUtils;
 import christmas.benefits.DateBenefit;
+import christmas.benefits.MerchandiseBenefit;
+import christmas.benefits.SpecialBenefit;
 import christmas.eventdate.EventDateUtils;
+import christmas.menu.Order;
 import christmas.view.InputValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+
+import java.util.List;
 
 public class ChristmasEventManager {
 
     private static InputView inputView;
     private static OutputView outputView;
     private static EventDateUtils eventDateUtils;
+    private static MerchandiseBenefit merchandiseBenefit;
+    private static SpecialBenefit specialBenefit;
     private static DateBenefit dateBenefit;
+    private static BenefitUtils benefitUtils;
 
     public ChristmasEventManager() {
         inputView = new InputView();
-        outputView = new OutputView();
         eventDateUtils = new EventDateUtils();
         dateBenefit = new DateBenefit(eventDateUtils);
+        merchandiseBenefit = new MerchandiseBenefit();
+        specialBenefit = new SpecialBenefit(eventDateUtils);
+        benefitUtils = new BenefitUtils(dateBenefit, specialBenefit, merchandiseBenefit);
+        outputView = new OutputView(benefitUtils);
     }
 
     public void startChristmasEvent(){
         int userInputDate = inputView.askVisitDate();
-        String userInputMenu = inputView.askMenuAndCount();
+        List<Order> userInputMenu = inputView.askMenuAndCount();
     }
 
     public InputView getInputView() {
-        return inputView;
+        return new InputView();
     }
 
     public OutputView getOutputView() {
@@ -41,5 +53,15 @@ public class ChristmasEventManager {
         return dateBenefit;
     }
 
+    public static MerchandiseBenefit getMerchandiseBenefit() {
+        return merchandiseBenefit;
+    }
 
+    public static SpecialBenefit getSpecialBenefit() {
+        return specialBenefit;
+    }
+
+    public static BenefitUtils getBenefitUtils() {
+        return benefitUtils;
+    }
 }

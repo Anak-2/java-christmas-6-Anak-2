@@ -80,4 +80,17 @@ public class BenefitUtils {
         }
         return Badge.NOTHING;
     }
+
+    public int calculateExpectedPrice(int totalPrice){
+        int totalBenefit = calculateTotalBenefit();
+        return Math.min(totalPrice, totalBenefit);
+    }
+
+    public int calculateTotalBenefit(){
+        return accumulateDiscount.calculateTotalBenefit();
+    }
+
+    public int calculateTotalDiscount(){
+        return accumulateDiscount.calculateTotalDiscount();
+    }
 }
