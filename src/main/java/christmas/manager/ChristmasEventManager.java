@@ -21,6 +21,7 @@ public class ChristmasEventManager {
 
     public void startChristmasEvent(){
         String userInputDate = inputView.askVisitDate();
+        String userInputMenu = inputView.askMenuAndCount();
     }
 
     public InputView getInputView() {
