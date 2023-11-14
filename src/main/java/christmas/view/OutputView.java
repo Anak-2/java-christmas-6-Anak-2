@@ -48,7 +48,7 @@ public class OutputView {
 
     private void printTotalPrice(List<Order> orders){
         System.out.println(TOTAL_PRICE_TITLE.getMessage());
-        System.out.println(Order.totalPrice(orders));
+        System.out.println(Order.totalPrice(orders)+WON);
         System.out.println();
     }
 
