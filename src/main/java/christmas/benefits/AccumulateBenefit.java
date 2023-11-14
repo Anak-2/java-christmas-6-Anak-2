@@ -73,12 +73,4 @@ public class AccumulateBenefit {
     public boolean isEventTarget() {
         return eventTarget;
     }
-
-    public void printInfo() {
-        System.out.println("AccumulateBenefit");
-        for(Map.Entry<BenefitName, Integer> e : benefitDiscount.entrySet()){
-            System.out.println(e.getKey().getName()+": "+e.getValue());
-        }
-        System.out.println("badge: "+badge.getBadgeName());
-    }
 }
