@@ -76,4 +76,14 @@ class InputViewTest {
             inputView.parseOrder(invalidInputMenu);
         });
     }
+
+    @Test
+    @DisplayName("한 번의 메뉴 주문 개수가 20개 초과시 예외 호출")
+    void exceedMenuTest(){
+        String invalidInputMenu = "양송이수프-5,타파스-9,티본스테이크-1,바비큐립-6";
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            inputView.parseOrder(invalidInputMenu);
+        });
+    }
 }

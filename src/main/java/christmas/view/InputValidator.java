@@ -38,8 +38,23 @@ public class InputValidator {
     public static void validMenuCount(int menuCount){
         final int MAX_MENU_COUNT = 20;
         final int MIN_MENU_COUNT = 1;
-        if(menuCount < MIN_MENU_COUNT || menuCount > MAX_MENU_COUNT){
+        if(menuCount < MIN_MENU_COUNT){
             throw new IllegalArgumentException(INVALID_MENU_COUNT.getMessage());
+        }
+        if(menuCount > MAX_MENU_COUNT){
+            throw new IllegalArgumentException(EXCEED_MAX_MENU_COUNT.getMessage());
+        }
+    }
+    
+    // 총 메뉴들의 개수 오류
+    public static void validTotalMenuCount(List<Order> orders){
+        int totalMenuCount = 0;
+        for(Order order : orders){
+            totalMenuCount += order.getCount();
+        }
+        final int MAX_MENU_COUNT = 20;
+        if(totalMenuCount > MAX_MENU_COUNT){
+            throw new IllegalArgumentException(EXCEED_MAX_MENU_COUNT.getMessage());
         }
     }
 

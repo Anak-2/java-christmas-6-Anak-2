@@ -45,12 +45,4 @@ class BenefitUtilsTest {
         assertThat(noBenefit.calculateBenefit(noBenefitOrder,day).calculateTotalBenefit())
                 .isEqualTo(BenefitConstant.NOTHING.getBenefit());
     }
-
-    @Test
-    void calculateTotalBenefit() {
-    }
-
-    @Test
-    void calculateTotalDiscount() {
-    }
 }

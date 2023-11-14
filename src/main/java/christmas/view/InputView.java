@@ -51,6 +51,7 @@ public class InputView {
         List<String> menus = parseComma(inputMenu);
         List<Order> orders = parseMenuAndCount(menus);
         InputValidator.isAllBeverage(orders);
+        InputValidator.validTotalMenuCount(orders);
         return orders;
     }
 
