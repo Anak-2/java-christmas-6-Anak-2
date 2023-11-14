@@ -1,9 +1,6 @@
 package christmas.manager;
 
-import christmas.benefits.BenefitUtils;
-import christmas.benefits.DateBenefit;
-import christmas.benefits.MerchandiseBenefit;
-import christmas.benefits.SpecialBenefit;
+import christmas.benefits.*;
 import christmas.eventdate.EventDateUtils;
 import christmas.menu.Order;
 import christmas.view.InputValidator;
@@ -22,6 +19,9 @@ public class ChristmasEventManager {
     private static DateBenefit dateBenefit;
     private static BenefitUtils benefitUtils;
 
+    private int userInputDate;
+    private List<Order> userInputMenu;
+
     public ChristmasEventManager() {
         inputView = new InputView();
         eventDateUtils = new EventDateUtils();
@@ -33,9 +33,20 @@ public class ChristmasEventManager {
     }
 
     public void startChristmasEvent(){
-        int userInputDate = inputView.askVisitDate();
-        List<Order> userInputMenu = inputView.askMenuAndCount();
+        inputChristmasEventOrder();
+        printResultOfChristmasEvent();
     }
+
+    public void inputChristmasEventOrder(){
+        userInputDate = inputView.askVisitDate();
+        userInputMenu = inputView.askMenuAndCount();
+    }
+
+    public void printResultOfChristmasEvent(){
+        AccumulateBenefit accumulateBenefit = benefitUtils.calculateBenefit(userInputMenu, userInputDate);
+        outputView.printEventPlanner(accumulateBenefit, userInputMenu);
+    }
+
 
     public InputView getInputView() {
         return new InputView();

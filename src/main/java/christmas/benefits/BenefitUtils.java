@@ -1,8 +1,6 @@
 package christmas.benefits;
 
 import christmas.benefits.constant.Badge;
-import christmas.benefits.constant.BenefitConstant;
-import christmas.benefits.constant.BenefitName;
 import christmas.eventdate.EventDateUtils;
 import christmas.menu.Order;
 
@@ -19,25 +17,26 @@ public class BenefitUtils {
     private final SpecialBenefit specialBenefit;
     private final MerchandiseBenefit merchandiseBenefit;
 
-    private AccumulateDiscount accumulateDiscount;
+    private AccumulateBenefit accumulateBenefit;
 
     public BenefitUtils(DateBenefit dateBenefit, SpecialBenefit specialBenefit,
                         MerchandiseBenefit merchandiseBenefit) {
         this.dateBenefit = dateBenefit;
         this.specialBenefit = specialBenefit;
         this.merchandiseBenefit = merchandiseBenefit;
-        this.accumulateDiscount = new AccumulateDiscount();
+        this.accumulateBenefit = new AccumulateBenefit();
     }
 
-    public AccumulateDiscount calculateBenefit(List<Order> orders, int day){
+    public AccumulateBenefit calculateBenefit(List<Order> orders, int day){
         int totalPrice = Order.totalPrice(orders);
         if(!isEventTarget(totalPrice)){
-            return accumulateDiscount;
+            return accumulateBenefit;
         }
         calculateDateBenefit(orders, day);
         calculateMerchandiseBenefit(totalPrice);
         calculateSpecialBenefit(day);
-        return accumulateDiscount;
+        calculateBadge(calculateTotalBenefit());
+        return accumulateBenefit;
     }
 
     private boolean isEventTarget(int totalOrder){
@@ -46,10 +45,10 @@ public class BenefitUtils {
 
     private int calculateDateBenefit(List<Order> orders, int day){
         int ddayBenefit = dateBenefit.calculateBenefitByDDay(day);
-        accumulateDiscount.accumulate(CHRISTMAS_DDAY, ddayBenefit);
+        accumulateBenefit.accumulate(CHRISTMAS_DDAY, ddayBenefit);
         if(EventDateUtils.isWeekend(day)){
             int weekendBenefit = dateBenefit.calculateBenefitByWeekend(orders);
-            accumulateDiscount.accumulate(WEEKEND_DISCOUNT, weekendBenefit);
+            accumulateBenefit.accumulate(WEEKEND_DISCOUNT, weekendBenefit);
             return Math.addExact(ddayBenefit, weekendBenefit);
         }
         int weekdayBenefit = dateBenefit.calculateBenefitByWeekday(orders);
@@ -58,39 +57,40 @@ public class BenefitUtils {
 
     private void calculateMerchandiseBenefit(int totalPrice){
         if(merchandiseBenefit.champagneDeserved(totalPrice)){
-            accumulateDiscount.accumulate(MERCHANDISE_EVENT, CHAMPAGNE.getBenefit());
+            accumulateBenefit.accumulate(MERCHANDISE_EVENT, CHAMPAGNE.getBenefit());
         }
     }
 
     private int calculateSpecialBenefit(int day){
         int specialDiscount = specialBenefit.starMarkedBenefit(day);
-        accumulateDiscount.accumulate(SPECIAL_DISCOUNT, specialDiscount);
+        accumulateBenefit.accumulate(SPECIAL_DISCOUNT, specialDiscount);
         return specialDiscount;
     }
 
     public Badge calculateBadge(int totalBenefit){
         if(totalBenefit >= Badge.SANTA.getRequiredPrice()){
-            return Badge.SANTA;
+            return accumulateBenefit.giveBadge(Badge.SANTA);
         }
         if(totalBenefit >= Badge.TREE.getRequiredPrice()){
-            return Badge.TREE;
+            return accumulateBenefit.giveBadge(Badge.TREE);
         }
         if(totalBenefit >= Badge.STAR.getRequiredPrice()){
-            return Badge.STAR;
+            return accumulateBenefit.giveBadge(Badge.STAR);
         }
-        return Badge.NOTHING;
+        return accumulateBenefit.giveBadge(Badge.NOTHING);
     }
 
     public int calculateExpectedPrice(int totalPrice){
         int totalBenefit = calculateTotalBenefit();
-        return Math.min(totalPrice, totalBenefit);
+        int expectedPrice = Math.min(totalPrice, totalBenefit);
+        return Math.max(expectedPrice, 0);
     }
 
     public int calculateTotalBenefit(){
-        return accumulateDiscount.calculateTotalBenefit();
+        return accumulateBenefit.calculateTotalBenefit();
     }
 
     public int calculateTotalDiscount(){
-        return accumulateDiscount.calculateTotalDiscount();
+        return accumulateBenefit.calculateTotalDiscount();
     }
 }
