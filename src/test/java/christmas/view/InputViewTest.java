@@ -42,4 +42,14 @@ class InputViewTest {
             inputView.parseOrder(inputMenu);
         });
     }
+
+    @Test
+    @DisplayName("없는 메뉴나 카테고리를 받았을 때 예외 호출")
+    void parseOrderNoCategoryTest(){
+        String inputMenu = "맛있는파스타-2,레드와인-1,초코케이크-1";
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            inputView.parseOrder(inputMenu);
+        });
+    }
 }
