@@ -55,7 +55,8 @@ public class OutputView {
     private void printMerchandise(AccumulateBenefit accumulateBenefit){
         System.out.println(MERCHANDISE_TITLE.getMessage());
         if(accumulateBenefit.checkMerchandiseEvent()){
-            System.out.println(Merchandise.CHAMPAGNE.getName() + ONE.getMessage());
+            System.out.println(Merchandise.CHAMPAGNE.getName()
+                    +SPACE+ONE.getMessage()+COUNT.getMessage()+NEXT_LINE);
             return;
         }
         System.out.println(Merchandise.NOTHING.getName()+NEXT_LINE);
