@@ -47,17 +47,6 @@ class BenefitUtilsTest {
     }
 
     @Test
-    @DisplayName("특별 할인 대상인지 검사하는 기능 테스트")
-    void checkSpecialBenefitTest(){
-        int day = 1;
-        BenefitUtils benefitUtils = christmasEventManager.makeBenefitUtils(new AccumulateBenefit());
-        int actualSpecialCount = benefitUtils.calculateSpecialBenefit(day);
-        int expectedSpecialCount = 0;
-
-        assertThat(actualSpecialCount).isEqualTo(expectedSpecialCount);
-    }
-
-    @Test
     @DisplayName("각 할인 혜택이 적용됐나 검사1")
     void eachBenefitTest(){
         int day1 = 1;
@@ -86,7 +75,6 @@ class BenefitUtilsTest {
         BenefitUtils benefit2 = christmasEventManager.makeBenefitUtils(new AccumulateBenefit());
         AccumulateBenefit accumulateBenefit2 = benefit2.calculateBenefit(noBenefitOrder, day26);
 
-        accumulateBenefit2.printInfo();
         assertThat(accumulateBenefit2.calculateTotalBenefit())
                 .isEqualTo(zero);
         assertThat(accumulateBenefit2.checkMerchandiseEvent())

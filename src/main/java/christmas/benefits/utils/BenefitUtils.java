@@ -65,7 +65,7 @@ public class BenefitUtils {
         }
     }
 
-    public int calculateSpecialBenefit(int day){
+    private int calculateSpecialBenefit(int day){
         int specialDiscount = specialBenefit.starMarkedBenefit(day);
         accumulateBenefit.accumulate(SPECIAL_DISCOUNT, specialDiscount);
         return specialDiscount;
