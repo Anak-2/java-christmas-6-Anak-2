@@ -31,7 +31,7 @@ public class OutputView {
     private void printOrders(List<Order> orders){
         System.out.println("<주문 메뉴>");
         for(Order order : orders){
-            System.out.println(order.getMenu()+" "+order.getCount()+"개");
+            System.out.println(order.getMenu().getMenuName()+" "+order.getCount()+"개");
         }
         System.out.println();
     }
@@ -54,6 +54,7 @@ public class OutputView {
 
     //    혜택 내역 출력
     private void printBenefitDetails(AccumulateBenefit accumulateBenefit){
+        System.out.println("<혜택 내역>");
         for (Map.Entry<BenefitName, Integer> entry : accumulateBenefit.getBenefitDiscount().entrySet()) {
             System.out.println(entry.getKey().getName() + ": " + -1*entry.getValue() + "원");
         }
