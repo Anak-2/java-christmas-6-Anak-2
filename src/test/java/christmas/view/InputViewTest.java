@@ -61,6 +61,7 @@ class InputViewTest {
     @DisplayName("중복 메뉴를 입력했을 시 예외 호출")
     void checkDuplicatedMenu(){
         String invalidInputMenu = "해산물파스타-1,해산물파스타-2,초코케이크-2,초코케이크-1";
+
         assertThrows(IllegalArgumentException.class, () -> {
             inputView.parseOrder(invalidInputMenu);
         });
@@ -69,6 +70,10 @@ class InputViewTest {
     @Test
     @DisplayName("메뉴 이름만 입력한 경우 예외 호출")
     void onlyMenuNameTest(){
+        String invalidInputMenu = "레드와인";
 
+        assertThrows(IllegalArgumentException.class, () -> {
+            inputView.parseOrder(invalidInputMenu);
+        });
     }
 }

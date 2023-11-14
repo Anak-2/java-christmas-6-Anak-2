@@ -64,7 +64,7 @@ public class InputView {
         List<Order> orders = new ArrayList<>();
 
         for(String menuAndCount : inputMenus){
-            List<String> order = Arrays.stream(menuAndCount.split("-")).toList();
+            List<String> order = parseByHyphen(menuAndCount);
             orders.add(new Order(InputValidator.validMenu(order.get(MENU), orders), parseMenuCount(order.get(COUNT))));
         }
         return orders;
@@ -79,5 +79,13 @@ public class InputView {
         }
         InputValidator.validMenuCount(menuCount);
         return menuCount;
+    }
+
+    public List<String> parseByHyphen(String menuAndCount){
+        List<String> parsed = Arrays.stream(menuAndCount.split("-")).toList();
+        if(parsed.size() < 2){
+            throw new IllegalArgumentException(INVALID_MENU_COUNT.getMessage());
+        }
+        return parsed;
     }
 }
