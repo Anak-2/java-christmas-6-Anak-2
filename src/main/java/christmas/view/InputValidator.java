@@ -29,8 +29,8 @@ public class InputValidator {
     }
 
     // 메뉴 이름 오류
-    public static void validMenu(String inputMenu){
-        Menu.findMenu(inputMenu);
+    public static Menu validMenu(String inputMenu){
+        return Menu.findMenu(inputMenu);
     }
 
     // 메뉴 개수 오류

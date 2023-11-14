@@ -36,10 +36,14 @@ class InputViewTest {
     @Test
     @DisplayName("주문을 이상하게 받았을 때 예외 호출")
     void parseOrderErrorTest(){
-        String inputMenu = "해산물파스타2,레드와인-1,초코케이크-1";
+        String invalidInputMenu1 = "해산파스타-1,레드와인-2";
+        String invalidInputMenu2 = "해산물파스타2,레드와인-1,초코케이크-1";
 
         assertThrows(IllegalArgumentException.class, () -> {
-            inputView.parseOrder(inputMenu);
+            inputView.parseOrder(invalidInputMenu1);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            inputView.parseOrder(invalidInputMenu2);
         });
     }
 

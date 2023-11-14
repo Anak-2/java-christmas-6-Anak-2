@@ -13,7 +13,7 @@ public enum Menu {
     CHRISTMAS_PASTA(MAIN_MENU, "크리스마스파스타",25_000),
     CHOCOLATE_CAKE(DESSERT, "초코케이크",15_000),
     ICE_CREAM(DESSERT,"아이스크림",5_000),
-    ZERO_COLA(DESSERT,"제로콜라",3_000),
+    ZERO_COLA(BEVERAGE,"제로콜라",3_000),
     RED_WINE(BEVERAGE,"레드와인",60_000),
     CHAMPAGNE(BEVERAGE,"샴페인",25_000);
 
