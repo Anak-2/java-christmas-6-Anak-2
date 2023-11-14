@@ -1,10 +1,9 @@
 package christmas.benefits;
 
+import christmas.benefits.utils.BenefitUtils;
 import christmas.config.ChristmasConfig;
 import christmas.manager.ChristmasEventManager;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BenefitUtilsTest {
 

@@ -1,4 +1,4 @@
-package christmas.benefits;
+package christmas.benefits.utils;
 
 import christmas.eventdate.EventDateUtils;
 import christmas.menu.Order;

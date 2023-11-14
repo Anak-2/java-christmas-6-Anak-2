@@ -1,4 +1,4 @@
-package christmas.benefits;
+package christmas.benefits.utils;
 
 public class MerchandiseBenefit {
 

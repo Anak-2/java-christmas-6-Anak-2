@@ -1,8 +1,7 @@
 package christmas.view;
 
 import christmas.benefits.AccumulateBenefit;
-import christmas.benefits.BenefitUtils;
-import christmas.benefits.constant.Badge;
+import christmas.benefits.utils.BenefitUtils;
 import christmas.benefits.constant.BenefitConstant;
 import christmas.benefits.constant.BenefitName;
 import christmas.benefits.constant.Merchandise;

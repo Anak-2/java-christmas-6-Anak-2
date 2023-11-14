@@ -1,5 +1,6 @@
-package christmas.benefits;
+package christmas.benefits.utils;
 
+import christmas.benefits.AccumulateBenefit;
 import christmas.benefits.constant.Badge;
 import christmas.eventdate.EventDateUtils;
 import christmas.menu.Order;

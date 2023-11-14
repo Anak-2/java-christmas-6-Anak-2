@@ -1,9 +1,12 @@
 package christmas.manager;
 
 import christmas.benefits.*;
+import christmas.benefits.utils.BenefitUtils;
+import christmas.benefits.utils.DateBenefit;
+import christmas.benefits.utils.MerchandiseBenefit;
+import christmas.benefits.utils.SpecialBenefit;
 import christmas.eventdate.EventDateUtils;
 import christmas.menu.Order;
-import christmas.view.InputValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -45,7 +48,7 @@ public class ChristmasEventManager {
     }
 
     public void printResultOfChristmasEvent(){
-        AccumulateBenefit accumulateBenefit = benefitUtils.calculateBenefit(userInputMenu, userInputDate);
+        accumulateBenefit = benefitUtils.calculateBenefit(userInputMenu, userInputDate);
         outputView.printEventPlanner(accumulateBenefit, userInputMenu, userInputDate);
     }
 
