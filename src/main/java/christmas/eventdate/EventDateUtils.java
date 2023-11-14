@@ -7,7 +7,7 @@ import static christmas.global.error.NumberErrorMessage.*;
 
 public class EventDateUtils {
 
-    public int calculateDateDiff(int startDay, int endDay){
+    public int calculateDateDiff(int endDay, int startDay){
         int diffDay = endDay - startDay;
         if(diffDay < 0){
             throw new IllegalArgumentException(LESS_THAN_ZERO.getMessage());

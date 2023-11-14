@@ -17,8 +17,8 @@ class DateBenefitTest {
     void calculateBenefitByDDay() {
         int currentDate = 25;
         int expectedBenefit = 3400;
-
         DateBenefit dateBenefit = christmasEventManager.getDateBenefit();
+
         int actualBenefit = dateBenefit.calculateBenefitByDDay(currentDate);
         assertThat(actualBenefit).isEqualTo(expectedBenefit);
     }

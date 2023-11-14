@@ -21,7 +21,7 @@ public class DateBenefit {
         if(eventDateUtils.isChristmasAfter(currentDate)){
             return benefit;
         }
-        int diffDays = eventDateUtils.calculateDateDiff(currentDate, CHRISTMAS_DATE.getDay());
+        int diffDays = eventDateUtils.calculateDateDiff(CHRISTMAS_DATE.getDay(), currentDate);
         return INIT_DATE_BENEFIT.getBenefit() + (diffDays * INCREASE_BENEFIT_BY_DATE.getBenefit());
     }
 
