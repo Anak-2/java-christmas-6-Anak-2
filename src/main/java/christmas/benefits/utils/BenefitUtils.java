@@ -4,6 +4,7 @@ import christmas.benefits.AccumulateBenefit;
 import christmas.benefits.constant.Badge;
 import christmas.eventdate.EventDateUtils;
 import christmas.menu.Order;
+import christmas.view.OutputFormat;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import static christmas.benefits.constant.BenefitName.*;
 public class BenefitUtils {
 
     private final int EVENT_TARGET_CONDITION = 10_000;
+    private final boolean NOT_EVENT_TARGET = false;
 
     private final DateBenefit dateBenefit;
     private final SpecialBenefit specialBenefit;
@@ -30,6 +32,7 @@ public class BenefitUtils {
     public AccumulateBenefit calculateBenefit(List<Order> orders, int day){
         int totalPrice = Order.totalPrice(orders);
         if(!isEventTarget(totalPrice)){
+            accumulateBenefit.setEventTarget(NOT_EVENT_TARGET);
             return accumulateBenefit;
         }
         calculateDateBenefit(orders, day);

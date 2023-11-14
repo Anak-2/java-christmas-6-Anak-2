@@ -9,7 +9,8 @@ public enum OutputFormat {
      AFTER_BENEFIT_PRICE_TITLE("<할인 후 예상 결제 금액>"),
      BADGE_TITLE("<12월 이벤트 배지>"),
      ONE("1"),
-     COUNT("개");
+     COUNT("개"),
+     EVENT_CONDITION_ALERT("할인 이벤트는 10,000원 이상부터 적용됩니다.");
 
     private String message;
 

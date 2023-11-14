@@ -11,6 +11,7 @@ public class AccumulateBenefit {
 
     private Map<BenefitName, Integer> benefitDiscount;
     private Badge badge;
+    private boolean eventTarget;
 
     public AccumulateBenefit() {
         benefitDiscount = new HashMap<>();
@@ -18,6 +19,7 @@ public class AccumulateBenefit {
             benefitDiscount.put(benefitName, 0);
         }
         badge = Badge.NOTHING;
+        eventTarget = true;
     }
 
     public int calculateTotalBenefit() {
@@ -58,16 +60,25 @@ public class AccumulateBenefit {
         return badge;
     }
 
+    public void setEventTarget(boolean eventTarget){
+        this.eventTarget = eventTarget;
+    }
+
+
+    public boolean checkMerchandiseEvent() {
+        int price = benefitDiscount.get(BenefitName.MERCHANDISE_EVENT);
+        return (price > BenefitConstant.NOTHING.getBenefit());
+    }
+
+    public boolean isEventTarget() {
+        return eventTarget;
+    }
+
     public void printInfo() {
         System.out.println("AccumulateBenefit");
         for(Map.Entry<BenefitName, Integer> e : benefitDiscount.entrySet()){
             System.out.println(e.getKey().getName()+": "+e.getValue());
         }
         System.out.println("badge: "+badge.getBadgeName());
-    }
-
-    public boolean checkMerchandiseEvent() {
-        int price = benefitDiscount.get(BenefitName.MERCHANDISE_EVENT);
-        return (price > BenefitConstant.NOTHING.getBenefit());
     }
 }

@@ -24,6 +24,7 @@ public class OutputView {
     }
 
     public void printEventPlanner(AccumulateBenefit accumulateBenefit, List<Order> orders, int orderDay){
+        printEventCondition(accumulateBenefit);
         printShowEventBenefit(orderDay);
         printOrders(orders);
         printTotalPrice(orders);
@@ -33,6 +34,14 @@ public class OutputView {
         printExpectedPrice(orders);
         printEventBadge(accumulateBenefit);
     }
+
+
+    public void printEventCondition(AccumulateBenefit accumulateBenefit){
+        if(!accumulateBenefit.isEventTarget()){
+            System.out.println(EVENT_CONDITION_ALERT.getMessage());
+        }
+    }
+
 
     private void printShowEventBenefit(int orderDay){
         System.out.printf("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n"+NEXT_LINE, orderDay);

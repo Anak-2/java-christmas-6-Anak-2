@@ -14,16 +14,12 @@ public class InputView {
     private final String GREETING_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
     private final String ASK_VISIT_DATE = "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)";
     private final String ASK_MENU_AND_COUNT = "주문하실 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)";
-    private final String EVENT_CONDITION = "할인 이벤트는 10,000원 이상부터 적용됩니다.";
-
-    public void printEventCondition(){
-        System.out.println(EVENT_CONDITION);
-    }
+    private final String EVENT_CONDITION = "만원 이상 주문 시 할인 혜택을 받을 수 있습니다.";
 
     public int askVisitDate(){
         int date;
         System.out.println(GREETING_MESSAGE);
-        printEventCondition();
+        System.out.println(EVENT_CONDITION);
         System.out.println(ASK_VISIT_DATE);
         while(true){
             try{
