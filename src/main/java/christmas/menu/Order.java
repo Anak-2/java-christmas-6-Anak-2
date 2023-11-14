@@ -50,4 +50,14 @@ public class Order {
         }
         return totalPrice;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Order order = (Order) obj;
+        return count == order.count && menu.equals(order.menu);
+    }
 }
