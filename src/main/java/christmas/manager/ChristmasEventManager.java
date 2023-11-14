@@ -53,15 +53,15 @@ public class ChristmasEventManager {
         return dateBenefit;
     }
 
-    public static MerchandiseBenefit getMerchandiseBenefit() {
+    public MerchandiseBenefit getMerchandiseBenefit() {
         return merchandiseBenefit;
     }
 
-    public static SpecialBenefit getSpecialBenefit() {
+    public SpecialBenefit getSpecialBenefit() {
         return specialBenefit;
     }
 
-    public static BenefitUtils getBenefitUtils() {
+    public BenefitUtils getBenefitUtils() {
         return benefitUtils;
     }
 }
