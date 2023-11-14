@@ -92,3 +92,41 @@
     - [X] 예시 테스트 : "해산물파스타-1,해산물파스타-2,초코케이크-2,초코케이크-1"
   - [X] 주문한 메뉴가 모두 음료수일 경우 예외 발생
 - [X] 할인이 10000원 미만일 때 적용 안 되는지 검사
+
+```
+.
+└── christmas
+    ├── Application.java
+    ├── benefits    //혜택 관련 클래스들 정리한 디렉토리
+    │   ├── AccumulateBenefit.java  //각 혜택들을 계산해서 저장하는 클래스
+    │   ├── constant    //혜택 계산에 필요한 매직 넘버나 이름들을 저장해둘 디렉토리
+    │   │   ├── Badge.java  //뱃지 관련 상수
+    │   │   ├── BenefitConstant.java    //헤택 계산 관련 상수
+    │   │   ├── BenefitName.java    //혜택 이름 관련 상수
+    │   │   └── Merchandise.java    //상품 관련 상수
+    │   └── utils   //혜택을 계산하기 위해 필요한 기능들을 정리한 디렉토리
+    │       ├── BenefitUtils.java   //모든 혜택을 계산하는 클래스
+    │       ├── DateBenefit.java    //날짜 관련 혜택을 계산하는 클래스
+    │       ├── MerchandiseBenefit.java //증정 헤택을 계산하는 클래스
+    │       └── SpecialBenefit.java //특별 혜택을 계산하는 클래스
+    ├── config 
+    │   └── ChristmasConfig.java    //ChristmasManager를 생성해주는 클래스
+    ├── eventdate
+    │   ├── EventDateConstant.java  //이벤트와 관련된 날짜 상수를 정리한 클래스
+    │   └── EventDateUtils.java     //이벤트 날짜 관련 기능을 처리하는 클래스
+    ├── global
+    │   └── error   //에러 메세지를 모아둔 디렉토리
+    │       ├── InputErrorMessage.java  //사용자 입력 도중 발생하는 에러 메세지
+    │       └── NumberErrorMessage.java  //숫자 관련 발생하는 에러 메세지
+    ├── manager
+    │   └── ChristmasEventManager.java  // 객체 생성을 담당하는 클래스, 프로그램 기능의 전체 플로우를 담당
+    ├── menu    //메뉴 관련 클래스 정리한 디렉토리
+    │   ├── Category.java   //카테고리를 상수로 관리하는 클래스
+    │   ├── Menu.java   //메뉴 관련 이름과 가격 같은 값들 모아둔 클래스
+    │   └── Order.java  //주문한 메뉴들 저장하는 클래스
+    └── view
+        ├── InputValidator.java //입력 관련 예외 처리 하는 클래스
+        ├── InputView.java  //입력 처리하는 클래스
+        ├── OutputFormat.java   //출력 포맷팅 해주는 클래스
+        └── OutputView.java //출력 처리하는 클래스
+```
