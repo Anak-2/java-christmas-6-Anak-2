@@ -21,8 +21,8 @@ public class DateBenefit {
         if(eventDateUtils.isChristmasAfter(currentDate)){
             return benefit;
         }
-        int diffDays = eventDateUtils.calculateDateDiff(CHRISTMAS_DATE.getDay(), currentDate);
-        return INIT_DATE_BENEFIT.getBenefit() + (diffDays * INCREASE_BENEFIT_BY_DATE.getBenefit());
+        int diffDays = eventDateUtils.calculateDateDiff(currentDate, EVENT_START_DATE.getDay());
+        return Math.addExact(INIT_DATE_BENEFIT.getBenefit(), (diffDays * INCREASE_BENEFIT_BY_DATE.getBenefit()));
     }
 
     public int calculateBenefitByWeekend(List<Order> orders){
