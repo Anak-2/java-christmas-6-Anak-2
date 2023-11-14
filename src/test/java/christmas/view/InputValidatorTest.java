@@ -21,11 +21,14 @@ class InputValidatorTest {
     void validDate() {
         String invalidInputDate1 = "a";
         String invalidInputDate2 = "32";
+        String invalidInputDate3 = "-1";
 
         assertThrows(IllegalArgumentException.class,
                 () -> InputValidator.validDate(invalidInputDate1));
         assertThrows(IllegalArgumentException.class,
                 () -> InputValidator.validDate(invalidInputDate2));
+        assertThrows(IllegalArgumentException.class,
+                () -> InputValidator.validDate(invalidInputDate3));
     }
 
     @Test
