@@ -33,7 +33,7 @@ public class ChristmasEventManager {
         dateBenefit = new DateBenefit(eventDateUtils);
         merchandiseBenefit = new MerchandiseBenefit();
         specialBenefit = new SpecialBenefit(eventDateUtils);
-        benefitUtils = new BenefitUtils(dateBenefit, specialBenefit, merchandiseBenefit, accumulateBenefit);
+        benefitUtils = makeBenefitUtils(accumulateBenefit);
         outputView = new OutputView(benefitUtils);
     }
 
@@ -77,7 +77,7 @@ public class ChristmasEventManager {
         return specialBenefit;
     }
 
-    public BenefitUtils getBenefitUtils() {
-        return benefitUtils;
+    public BenefitUtils makeBenefitUtils(AccumulateBenefit accumulateBenefit){
+        return new BenefitUtils(dateBenefit, specialBenefit, merchandiseBenefit, accumulateBenefit);
     }
 }
