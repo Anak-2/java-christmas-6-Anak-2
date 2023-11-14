@@ -16,15 +16,14 @@ public class BenefitUtils {
     private final DateBenefit dateBenefit;
     private final SpecialBenefit specialBenefit;
     private final MerchandiseBenefit merchandiseBenefit;
-
-    private AccumulateBenefit accumulateBenefit;
+    private final AccumulateBenefit accumulateBenefit;
 
     public BenefitUtils(DateBenefit dateBenefit, SpecialBenefit specialBenefit,
-                        MerchandiseBenefit merchandiseBenefit) {
+                        MerchandiseBenefit merchandiseBenefit, AccumulateBenefit accumulateBenefit) {
         this.dateBenefit = dateBenefit;
         this.specialBenefit = specialBenefit;
         this.merchandiseBenefit = merchandiseBenefit;
-        this.accumulateBenefit = new AccumulateBenefit();
+        this.accumulateBenefit = accumulateBenefit;
     }
 
     public AccumulateBenefit calculateBenefit(List<Order> orders, int day){
@@ -67,7 +66,7 @@ public class BenefitUtils {
         return specialDiscount;
     }
 
-    public Badge calculateBadge(int totalBenefit){
+    private Badge calculateBadge(int totalBenefit){
         if(totalBenefit >= Badge.SANTA.getRequiredPrice()){
             return accumulateBenefit.giveBadge(Badge.SANTA);
         }
@@ -82,15 +81,11 @@ public class BenefitUtils {
 
     public int calculateExpectedPrice(int totalPrice){
         int totalBenefit = calculateTotalBenefit();
-        int expectedPrice = Math.min(totalPrice, totalBenefit);
+        int expectedPrice = Math.subtractExact(totalPrice, totalBenefit);
         return Math.max(expectedPrice, 0);
     }
 
     public int calculateTotalBenefit(){
         return accumulateBenefit.calculateTotalBenefit();
-    }
-
-    public int calculateTotalDiscount(){
-        return accumulateBenefit.calculateTotalDiscount();
     }
 }

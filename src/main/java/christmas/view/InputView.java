@@ -9,11 +9,13 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
+    private final String GREETING_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
     private final String ASK_VISIT_DATE = "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)";
     private final String ASK_MENU_AND_COUNT = "주문하실 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)";
 
     public int askVisitDate(){
         int date = 0;
+        System.out.println(GREETING_MESSAGE);
         System.out.println(ASK_VISIT_DATE);
         while(true){
             try{
@@ -29,8 +31,15 @@ public class InputView {
 
     public List<Order> askMenuAndCount(){
         System.out.println(ASK_MENU_AND_COUNT);
-        String menuAndCount = Console.readLine();
-        return parseOrder(menuAndCount);
+        String menuAndCount;
+        while(true){
+            try{
+                menuAndCount = Console.readLine();
+                return parseOrder(menuAndCount);
+            }catch(IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public int parseDate(String inputDate){

@@ -18,6 +18,7 @@ public class ChristmasEventManager {
     private static SpecialBenefit specialBenefit;
     private static DateBenefit dateBenefit;
     private static BenefitUtils benefitUtils;
+    private static AccumulateBenefit accumulateBenefit;
 
     private int userInputDate;
     private List<Order> userInputMenu;
@@ -25,10 +26,11 @@ public class ChristmasEventManager {
     public ChristmasEventManager() {
         inputView = new InputView();
         eventDateUtils = new EventDateUtils();
+        accumulateBenefit = new AccumulateBenefit();
         dateBenefit = new DateBenefit(eventDateUtils);
         merchandiseBenefit = new MerchandiseBenefit();
         specialBenefit = new SpecialBenefit(eventDateUtils);
-        benefitUtils = new BenefitUtils(dateBenefit, specialBenefit, merchandiseBenefit);
+        benefitUtils = new BenefitUtils(dateBenefit, specialBenefit, merchandiseBenefit, accumulateBenefit);
         outputView = new OutputView(benefitUtils);
     }
 
@@ -44,7 +46,7 @@ public class ChristmasEventManager {
 
     public void printResultOfChristmasEvent(){
         AccumulateBenefit accumulateBenefit = benefitUtils.calculateBenefit(userInputMenu, userInputDate);
-        outputView.printEventPlanner(accumulateBenefit, userInputMenu);
+        outputView.printEventPlanner(accumulateBenefit, userInputMenu, userInputDate);
     }
 
 

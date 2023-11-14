@@ -1,5 +1,7 @@
 package christmas.menu;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,11 +12,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OrderTest {
 
-    Order order1 = new Order(Menu.SEAFOOD_PASTA, 2);
-    Order order2 = new Order(Menu.RED_WINE, 1);
-    Order order3 = new Order(Menu.CHOCOLATE_CAKE, 1);
+    private List<Order> orders;
 
-    List<Order> orders = Arrays.asList(order1, order2, order3);
+    @BeforeEach
+    public void setUp() {
+        Order order1 = new Order(Menu.SEAFOOD_PASTA, 2);
+        Order order2 = new Order(Menu.RED_WINE, 1);
+        Order order3 = new Order(Menu.CHOCOLATE_CAKE, 1);
+
+        orders = Arrays.asList(order1, order2, order3);
+    }
 
     @Test
     @DisplayName("주문에서 디저트 메뉴만 고르는 기능 테스트")

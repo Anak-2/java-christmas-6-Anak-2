@@ -17,6 +17,7 @@ public class AccumulateBenefit {
         for (BenefitName benefitName : BenefitName.values()) {
             benefitDiscount.put(benefitName, 0);
         }
+        badge = Badge.NOTHING;
     }
 
     public int calculateTotalBenefit() {
