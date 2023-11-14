@@ -7,6 +7,9 @@ import static christmas.global.error.NumberErrorMessage.*;
 
 public class EventDateUtils {
 
+    private static final List<Integer> WEEKEND_DAYS = Arrays.asList(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
+    private static final List<Integer> STAR_MARKED_DAYS = Arrays.asList(3, 10, 17, 24, 25, 31);
+
     public int calculateDateDiff(int endDay, int startDay){
         int diffDay = endDay - startDay;
         if(diffDay < 0){
@@ -20,17 +23,16 @@ public class EventDateUtils {
     }
 
     public static boolean isWeekend(int day){
-        List<Integer> weekends = Arrays.asList(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
-        return weekends.contains(day);
+        return WEEKEND_DAYS.contains(day);
     }
 
     public boolean isStarMarked(int day){
-        List<Integer> starMarkedDays = Arrays.asList(3,10,17,24,25,31);
-        return starMarkedDays.contains(day);
+        return STAR_MARKED_DAYS.contains(day);
     }
 
     public void isValidDay(int day){
-        if(day > 31 || day < 1){
+        if(day > EventDateConstant.EVENT_LAST_DATE.getDay()
+                || day < EventDateConstant.EVENT_START_DATE.getDay()){
             throw new IllegalArgumentException(OUT_OF_DECEMBER.getMessage());
         }
     }
