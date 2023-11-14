@@ -65,7 +65,7 @@ public class InputView {
 
         for(String menuAndCount : inputMenus){
             List<String> order = Arrays.stream(menuAndCount.split("-")).toList();
-            orders.add(new Order(Menu.findMenu(order.get(MENU)), parseMenuCount(order.get(COUNT))));
+            orders.add(new Order(InputValidator.validMenu(order.get(MENU), orders), parseMenuCount(order.get(COUNT))));
         }
         return orders;
     }

@@ -16,6 +16,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InputValidatorTest {
 
+    private List<Order> orders;
+
+    @BeforeEach
+    public void setUp() {
+        Order order1 = new Order(Menu.SEAFOOD_PASTA, 2);
+        Order order2 = new Order(Menu.RED_WINE, 1);
+        Order order3 = new Order(Menu.CHOCOLATE_CAKE, 1);
+
+        orders = Arrays.asList(order1, order2, order3);
+    }
+
     @Test
     @DisplayName("날짜 오류 기능 테스트")
     void validDate() {
@@ -34,15 +45,19 @@ class InputValidatorTest {
     @Test
     @DisplayName("있는 메뉴인지 검사하는 기능 테스트")
     void validMenu() {
-        String validMenu = "해산물파스타";
+
+        String validMenu = Menu.BARBECUE_RIBS.getMenuName();
         String invalidMenu1  = "해물파스타";
         String invalidMenu2 = "햄울파스타";
+        String duplicatedMenu1 = "해산물파스타";
 
-        assertDoesNotThrow(() -> InputValidator.validMenu(validMenu));
+        assertDoesNotThrow(() -> InputValidator.validMenu(validMenu, orders));
         assertThrows(IllegalArgumentException.class,
-                () -> InputValidator.validMenu(invalidMenu1));
+                () -> InputValidator.validMenu(invalidMenu1, orders));
         assertThrows(IllegalArgumentException.class,
-                () -> InputValidator.validMenu(invalidMenu2));
+                () -> InputValidator.validMenu(invalidMenu2, orders));
+        assertThrows(IllegalArgumentException.class,
+                () -> InputValidator.validMenu(duplicatedMenu1, orders));
     }
 
     @Test

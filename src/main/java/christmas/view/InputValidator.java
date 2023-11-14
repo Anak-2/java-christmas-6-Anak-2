@@ -8,8 +8,7 @@ import christmas.menu.Order;
 
 import java.util.List;
 
-import static christmas.global.error.InputErrorMessage.INVALID_MENU_COUNT;
-import static christmas.global.error.InputErrorMessage.NO_ALL_BEVERAGE;
+import static christmas.global.error.InputErrorMessage.*;
 import static christmas.global.error.NumberErrorMessage.NOT_NUMBER;
 
 public class InputValidator {
@@ -28,9 +27,11 @@ public class InputValidator {
         return date;
     }
 
-    // 메뉴 이름 오류
-    public static Menu validMenu(String inputMenu){
-        return Menu.findMenu(inputMenu);
+    // 메뉴 이름, 중복 오류
+    public static Menu validMenu(String inputMenu, List<Order> orders){
+        Menu menuInput = Menu.findMenu(inputMenu);
+        findDuplicatedMenu(menuInput, orders);
+        return menuInput;
     }
 
     // 메뉴 개수 오류
@@ -50,5 +51,16 @@ public class InputValidator {
             }
         }
         throw new IllegalArgumentException(NO_ALL_BEVERAGE.getMessage());
+    }
+
+    // 중복 메뉴 검사
+    public static void findDuplicatedMenu(Menu menu, List<Order> orders) {
+         Order findOrder = orders.stream()
+                .filter(order -> order.getMenu().equals(menu))
+                .findFirst()
+                .orElse(null);
+         if(findOrder != null){
+             throw new IllegalArgumentException(DUPLICATED_MENU.getMessage());
+         }
     }
 }
