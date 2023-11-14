@@ -7,6 +7,8 @@ import christmas.menu.Order;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static christmas.global.error.InputErrorMessage.INVALID_MENU_COUNT;
+
 public class InputView {
 
     private final String GREETING_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
@@ -20,11 +22,10 @@ public class InputView {
         while(true){
             try{
                 date = parseDate(Console.readLine());
+                break;
             }catch(IllegalArgumentException e){
                 System.out.println(e.getMessage());
-                continue;
             }
-            break;
         }
         return date;
     }
@@ -70,7 +71,12 @@ public class InputView {
     }
 
     public int parseMenuCount(String inputMenuCount){
-        int menuCount = Integer.parseInt(inputMenuCount);
+        int menuCount;
+        try{
+            menuCount = Integer.parseInt(inputMenuCount);
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException(INVALID_MENU_COUNT.getMessage());
+        }
         InputValidator.validMenuCount(menuCount);
         return menuCount;
     }
