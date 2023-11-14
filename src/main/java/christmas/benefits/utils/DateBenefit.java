@@ -2,6 +2,7 @@ package christmas.benefits.utils;
 
 import christmas.eventdate.EventDateUtils;
 import christmas.menu.Order;
+import org.mockito.internal.matchers.Or;
 
 import java.util.List;
 
@@ -26,12 +27,12 @@ public class DateBenefit {
     }
 
     public int calculateBenefitByWeekend(List<Order> orders){
-        List<Order> mainMenus = Order.findMainMenus(orders);
-        return Math.multiplyExact(mainMenus.size(), WEEKEND_DISCOUNT.getBenefit());
+        int mainMenus = Order.totalCount(Order.findMainMenus(orders));
+        return Math.multiplyExact(mainMenus, WEEKEND_DISCOUNT.getBenefit());
     }
 
     public int calculateBenefitByWeekday(List<Order> orders){
-        List<Order> desserts = Order.findDesserts(orders);
-        return Math.multiplyExact(desserts.size(), WEEKEND_DISCOUNT.getBenefit());
+        int desserts = Order.totalCount(Order.findDesserts(orders));
+        return Math.multiplyExact(desserts, WEEKEND_DISCOUNT.getBenefit());
     }
 }

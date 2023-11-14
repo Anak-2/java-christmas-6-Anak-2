@@ -52,6 +52,7 @@ public class BenefitUtils {
             return Math.addExact(ddayBenefit, weekendBenefit);
         }
         int weekdayBenefit = dateBenefit.calculateBenefitByWeekday(orders);
+        accumulateBenefit.accumulate(WEEKDAY_DISCOUNT, weekdayBenefit);
         return Math.addExact(ddayBenefit, weekdayBenefit);
     }
 
@@ -82,7 +83,10 @@ public class BenefitUtils {
 
     public int calculateExpectedPrice(int totalPrice){
         int totalBenefit = calculateTotalBenefit();
+        int merchandiseBenefit = accumulateBenefit.getBenefitDiscount()
+                                                .get(MERCHANDISE_EVENT);
         int expectedPrice = Math.subtractExact(totalPrice, totalBenefit);
+        expectedPrice = Math.addExact(expectedPrice, merchandiseBenefit);
         return Math.max(expectedPrice, 0);
     }
 

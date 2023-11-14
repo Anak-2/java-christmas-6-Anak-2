@@ -43,6 +43,14 @@ public class Order {
         return mainMenus;
     }
 
+    public static int totalCount(List<Order> orders){
+        int totalCount = 0;
+        for(Order order : orders){
+            totalCount += order.getCount();
+        }
+        return totalCount;
+    }
+
     public static int totalPrice(List<Order> orders) {
         int totalPrice = 0;
         for(Order order : orders){
