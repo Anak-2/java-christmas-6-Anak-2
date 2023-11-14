@@ -14,7 +14,7 @@ public class InputView {
     private final String ASK_MENU_AND_COUNT = "주문하실 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)";
 
     public int askVisitDate(){
-        int date = 0;
+        int date;
         System.out.println(GREETING_MESSAGE);
         System.out.println(ASK_VISIT_DATE);
         while(true){
@@ -43,8 +43,7 @@ public class InputView {
     }
 
     public int parseDate(String inputDate){
-        InputValidator.validDate(inputDate);
-        return Integer.parseInt(inputDate);
+        return InputValidator.validDate(inputDate);
     }
 
     public List<Order> parseOrder(String inputMenu){

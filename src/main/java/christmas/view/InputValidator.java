@@ -10,15 +10,22 @@ import java.util.List;
 
 import static christmas.global.error.InputErrorMessage.INVALID_MENU_COUNT;
 import static christmas.global.error.InputErrorMessage.NO_ALL_BEVERAGE;
+import static christmas.global.error.NumberErrorMessage.NOT_NUMBER;
 
 public class InputValidator {
 
     private static final EventDateUtils eventDateUtils = new EventDateUtils();
 
     // 날짜 오류
-    public static void validDate(String inputDate){
-        int date = Integer.parseInt(inputDate);
+    public static int validDate(String inputDate){
+        int date;
+        try{
+            date = Integer.parseInt(inputDate);
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException(NOT_NUMBER.getMessage());
+        }
         eventDateUtils.isValidDay(date);
+        return date;
     }
 
     // 메뉴 이름 오류
