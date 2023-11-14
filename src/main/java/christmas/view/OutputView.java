@@ -10,9 +10,14 @@ import christmas.menu.Order;
 import java.util.List;
 import java.util.Map;
 
+import static christmas.view.OutputFormat.*;
+
 public class OutputView {
 
     private final BenefitUtils benefitUtils;
+    private final String WON = "원";
+    private final String NEXT_LINE = "\n";
+    private final String SPACE = " ";
 
     public OutputView(BenefitUtils benefitUtils) {
         this.benefitUtils = benefitUtils;
@@ -30,44 +35,42 @@ public class OutputView {
     }
 
     private void printShowEventBenefit(int orderDay){
-        System.out.println("12월 " + orderDay + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
-        System.out.println();
+        System.out.printf("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n"+NEXT_LINE, orderDay);
     }
 
     private void printOrders(List<Order> orders){
-        System.out.println("<주문 메뉴>");
+        System.out.println(ORDER_MENU_TITLE.getMessage());
         for(Order order : orders){
-            System.out.println(order.getMenu().getMenuName()+" "+order.getCount()+"개");
+            System.out.println(order.getMenu().getMenuName()+SPACE+order.getCount()+COUNT.getMessage());
         }
         System.out.println();
     }
 
     private void printTotalPrice(List<Order> orders){
-        System.out.println("<할인 전 총주문 금액>");
+        System.out.println(TOTAL_PRICE_TITLE.getMessage());
         System.out.println(Order.totalPrice(orders));
         System.out.println();
     }
 
     private void printMerchandise(AccumulateBenefit accumulateBenefit){
-        System.out.println("<증정 메뉴>");
+        System.out.println(MERCHANDISE_TITLE.getMessage());
         if(accumulateBenefit.checkMerchandiseEvent()){
-            System.out.println(Merchandise.CHAMPAGNE.getName() + " 1개");
+            System.out.println(Merchandise.CHAMPAGNE.getName() + ONE.getMessage());
             return;
         }
-        System.out.println(Merchandise.NOTHING.getName());
-        System.out.println();
+        System.out.println(Merchandise.NOTHING.getName()+NEXT_LINE);
     }
 
     //    혜택 내역 출력
     private void printBenefitDetails(AccumulateBenefit accumulateBenefit){
-        System.out.println("<혜택 내역>");
+        System.out.println(BENEFIT_LIST_TITLE.getMessage());
         boolean NO_BENEFIT = true;
         for (Map.Entry<BenefitName, Integer> entry : accumulateBenefit.getBenefitDiscount().entrySet()) {
             if(entry.getValue() == BenefitConstant.NOTHING.getBenefit()){
                 continue;
             }
             NO_BENEFIT = false;
-            System.out.println(entry.getKey().getName() + ": " + -1*entry.getValue() + "원");
+            System.out.println(entry.getKey().getName() + ": " + convertToMinus(entry.getValue()) + WON);
         }
         if(NO_BENEFIT){
             System.out.println(BenefitName.NO_BENEFIT.getName());
@@ -76,21 +79,23 @@ public class OutputView {
     }
 
     private void printTotalBenefit(AccumulateBenefit accumulateBenefit){
-        System.out.println("<총혜택 금액>");
-        System.out.println(-1 * accumulateBenefit.calculateTotalBenefit()+"원");
-        System.out.println();
+        System.out.println(TOTAL_BENEFIT_TITLE.getMessage());
+        System.out.println(convertToMinus(accumulateBenefit.calculateTotalBenefit())+WON+NEXT_LINE);
     }
 
     private void printExpectedPrice(List<Order> orders){
         int totalPrice = Order.totalPrice(orders);
 
-        System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println(benefitUtils.calculateExpectedPrice(totalPrice)+"원");
-        System.out.println();
+        System.out.println(AFTER_BENEFIT_PRICE_TITLE.getMessage());
+        System.out.println(benefitUtils.calculateExpectedPrice(totalPrice)+WON+NEXT_LINE);
     }
 
     private void printEventBadge(AccumulateBenefit accumulateBenefit){
-        System.out.println("<12월 이벤트 배지>");
+        System.out.println(BADGE_TITLE.getMessage());
         System.out.println(accumulateBenefit.getBadge().getBadgeName());
+    }
+
+    private int convertToMinus(int plus){
+        return plus * -1;
     }
 }
