@@ -34,24 +34,36 @@ class DateBenefitTest {
     }
 
     @Test
-    @DisplayName("날짜마다 100원씩 증가하는 혜택의 현재 날짜 헤택 계산하는 함수 테스트")
+    @DisplayName("날짜마다 100원씩 증가하는 혜택의 현재 날짜 헤택 계산하는 함수 테스트 (크리스마스 이후)")
     void calculateBenefitByDDay() {
-        int currentDate = 25;
-        int expectedBenefit = 3400;
-
-        int currentDate2 = 1;
-        int expectedBenefit2 = 1000;
-
         int currentDate3 = 26;
         int expectedBenefit3 = 0;
 
-        int actualBenefit = dateBenefit.calculateBenefitByDDay(currentDate);
-        int actualBenefit2 = dateBenefit.calculateBenefitByDDay(currentDate2);
         int actualBenefit3 = dateBenefit.calculateBenefitByDDay(currentDate3);
 
-        assertThat(actualBenefit).isEqualTo(expectedBenefit);
-        assertThat(actualBenefit2).isEqualTo(expectedBenefit2);
         assertThat(actualBenefit3).isEqualTo(expectedBenefit3);
+    }
+
+    @Test
+    @DisplayName("날짜마다 100원씩 증가하는 혜택의 현재 날짜 헤택 계산하는 함수 테스트 (크리스마스 당일)")
+    void calculateBenefitByDDay2() {
+        int currentDate = 25;
+        int expectedBenefit = 3400;
+
+        int actualBenefit = dateBenefit.calculateBenefitByDDay(currentDate);
+
+        assertThat(actualBenefit).isEqualTo(expectedBenefit);
+    }
+
+    @Test
+    @DisplayName("날짜마다 100원씩 증가하는 혜택의 현재 날짜 헤택 계산하는 함수 테스트 (이벤트 시작날)")
+    void calculateBenefitByDDay3() {
+        int currentDate2 = 1;
+        int expectedBenefit2 = 1000;
+
+        int actualBenefit2 = dateBenefit.calculateBenefitByDDay(currentDate2);
+
+        assertThat(actualBenefit2).isEqualTo(expectedBenefit2);
     }
 
     @Test
